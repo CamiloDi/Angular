@@ -1,0 +1,50 @@
+<div class="container top30">
+<div class="row">
+<div class="col-md-3">
+  <img [src]="artist.images|sinfoto" class="img-thumbnail img-circular"alt="">
+</div>
+<div class="col-md-9">
+  <h1 class="text-center">{{artist.name}}</h1>
+  <hr>
+  <button type="button" class="btn btn-outline-primary" [routerLink]="['/search']">Volver</button>
+  <a  class="btn btn-outline-success" href="{{artist.external_urls.spotify}}" target="_blank">Ir a Spotify</a>
+</div>
+</div>
+<br>
+<h3>Top Tracks</h3>
+<hr>
+<div class="row">
+<div class="col-md-12">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Imagen Album</th>
+        <th>Cancion</th>
+        <th>Popularidad</th>
+        <th>Escuchar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let track of _spotify.tracks;let i=index;">
+        <td>{{i+1}}</td>
+        <td>
+          <img [src]="track.album.images[2].url">
+        </td>
+        <td><p>{{track.name}}</p></td>
+        <td><p>{{track.popularity}}%</p></td>
+        <td>
+          <iframe [src]="tracks.uri|domseguro:'https://open.spotify.com/embed?uri='"
+          width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          <!-- <audio controls>
+            <source [src]="track.preview_url">
+            tu navegador no es compatible! :c
+          </audio> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+</div>

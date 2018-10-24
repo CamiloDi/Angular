@@ -1,0 +1,55 @@
+<div class="main-container">
+    <a class="btn btn-outline-success btn-circle-sm" alt="Agregar Gasto!" tabindex="-1" role="button">
+        <i class="material-icons">add_circle</i>
+    </a>
+</div>
+<div class="container table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+           <tr >
+                <th class="text-center">Ver Detalle</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Valor ($)</th>
+                <th scope="col"><div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Qué Desea Hacer?
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0)"  (click)="PagarTodo(listaGastosFijos);">Pagar Todo</a>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="BorrarTodo();">Borrar Todo</a>
+                        </div>
+                    </div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="gasto-{{gastoFijo.id}}" [ngClass]="clasePagado(gastoFijo.pagado)"  *ngFor="let gastoFijo of listaGastosFijos">
+                <td *ngIf="gastoFijo" class="text-center" >
+                    <a href="javascript:void(0)"> <i (click)="verDetalle(gastoFijo);"  class="material-icons">search</i></a>
+                </td>
+                <td *ngIf="gastoFijo">{{gastoFijo.nombre}}</td>
+                <td *ngIf="gastoFijo">{{gastoFijo.fecha | date:'mediumDate'}}</td>
+                <td *ngIf="gastoFijo">${{gastoFijo.valor | separadorMiles}}</td>
+                <td *ngIf="gastoFijo">
+                    <div *ngIf="gastoFijo" class="dropdown">
+                        <button [disabled]="gastoFijo.pagado" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Qué Desea Hacer?
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="Pagar(gastoFijo);">Pagar</a>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="Editar(gastoFijo);">Editar</a>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="Borrar(gastoFijo);">Borrar</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr *ngIf="listaGastosFijos.length==0">
+                    <td class="text-center">
+                        <h3>No posee ningun registro este mes</h3>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
