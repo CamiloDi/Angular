@@ -1,0 +1,70 @@
+<h4>Formularios <small>template</small></h4>
+<hr>
+<form novalidate="" (ngSubmit)="guardar(forma)" #forma="ngForm">
+
+  <div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               type="text"
+               name="nombre"
+               [(ngModel)]="usuario.nombre"
+               required
+               minlength="3"
+               placeholder="Nombre"
+               #nombre="ngModel">
+
+               <div *ngIf="nombre.errors?.required">
+                 Esta campo es requerido
+               </div>
+               <div *ngIf="nombre.errors?.minlength">
+                  Por lo menos {{nombre.errors.minlength.requiredLength}} caracteres
+                </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+
+        <input class="form-control"
+               type="text"
+               placeholder="Apellido"
+               [(ngModel)]="usuario.apellido"
+               required
+               name="Apellido">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-md-8">
+
+      <input class="form-control"
+             type="email"
+             placeholder="Correo electrónico"
+             [(ngModel)]="usuario.correo"
+             required
+             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+             name="Correo">
+    </div>
+  </div>
+
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
